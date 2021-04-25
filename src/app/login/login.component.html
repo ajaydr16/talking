@@ -1,0 +1,166 @@
+<main>
+  <section class="section section-shaped section-lg">
+    <div class="shape shape-style-1 bg-gradient-default">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="container pt-lg-md">
+      <div class="row justify-content-center">
+        <div class="col-lg-5">
+          <div class="card bg-secondary shadow border-0">
+            <!-- <div class="card-header bg-white pb-5">
+              <div class="text-muted text-center mb-3">
+                <small>Sign in with</small>
+              </div>
+              <div class="btn-wrapper text-center">
+                <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+                  <span class="btn-inner--icon">
+                    <img src="./assets/img/icons/common/github.svg">
+                  </span>
+                  <span class="btn-inner--text">Github</span>
+                </a>
+                <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+                  <span class="btn-inner--icon">
+                    <img src="./assets/img/icons/common/google.svg">
+                  </span>
+                  <span class="btn-inner--text">Google</span>
+                </a>
+              </div>
+            </div> -->
+            <ngb-tabset [justify]="'center'" class="custom-tab-content flex-column flex-md-row" type="pills">
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <i class="fa fa-keyboard-o"></i>  Manual
+                </ng-template>
+                  <ng-template ngbTabContent>
+                    <div class="card-body px-lg-5 py-lg-5">
+                      <div class="text-center text-muted mb-4">
+                        <h3>Generate Key</h3>
+                      </div>
+                      <form role="form" #manualKey="ngForm" (ngSubmit)="manualGenerate(manualKey);">
+                        <div class="form-group mb-3" [ngClass]="{'focused':focus===true}">
+                          <div class="input-group input-group-alternative">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="ni fa fa-user"></i></span>
+                            </div>
+                            <input required class="form-control" placeholder="First Name" type="text" (focus)="focus=true" (blur)="focus=false" name="firstName" ngModel>
+                          </div>
+                        </div>
+                        <div class="form-group mb-3" [ngClass]="{'focused':focus1===true}">
+                          <div class="input-group input-group-alternative">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="ni fa fa-user"></i></span>
+                            </div>
+                            <input required class="form-control" placeholder="Last Name" type="text" (focus)="focus1=true" (blur)="focus=false" name="lastName" ngModel>
+                          </div>
+                        </div>
+                        <div class="form-group mb-3" [ngClass]="{'focused':focus2===true}">
+                          <div class="input-group input-group-alternative">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                            </div>
+                            <input required class="form-control" placeholder="Email" type="Email" (focus)="focus2=true" (blur)="focus=false" name="userEmailId" ngModel>
+                          </div>
+                        </div>
+                        
+                        <div class="text-center">
+                          <button type="submit" class="btn btn-primary my-4" (click)="open(classic2, 'Notification', '')">Generate</button>
+                        </div>
+                      </form>
+                    </div>
+                  </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <i class="ni ni-cloud-upload-96 mr-2"></i> Upload
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="card-body px-lg-5 py-lg-5">
+                    <div class="text-center text-muted mb-4">
+                      <h3>Generate Keys</h3>
+                    </div>
+                    <form role="form">
+                      <div class="form-group mb-3" [ngClass]="{'focused':focus3===true}">
+                        <div class="input-group input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni fa-file-excel-o "></i></span>
+                          </div>
+                          <input class="form-control file" placeholder="Upload File" type="file" accept=".csv" (focus)="focus=true" (blur)="focus=false" (change)="handleFileSelect($event)">
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="text-center">
+                        <button type="button" class="btn btn-primary my-4" (click)="open(classic2, 'Notification', '')">Generate</button>
+                      </div>
+                    </form>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              
+          </ngb-tabset>
+          <div align="right" class="col-md-12">
+            <button class="btn btn-wrapper btn-primary mb-10" (click)="open(classic2, 'Notification', '')">
+               Recent
+            </button>
+            <ng-template class="temp-size" #classic2 let-c="close" let-d="dismiss">
+              <div class="modal-content bg-blue">
+                <div class="modal-header">
+                  <h6 class="modal-title" id="modal-title-notification">Key Generated</h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="py-3 text-center">
+                    <i class="ni fa fa-key"></i>
+                    <h4 class="heading mt-4">Here is your Key!</h4>
+                    <!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
+                    
+                    <mat-table class="temp-size" [dataSource]="dataSource">
+                      <!-- [...] -->
+                      <ng-container  matColumnDef="firstName">
+                        <mat-header-cell   *matHeaderCellDef>Name</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.firstName}}</mat-cell>
+                      </ng-container>
+          
+                      <ng-container  matColumnDef="userEmailId">
+                        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.userEmailId}}</mat-cell>
+                      </ng-container>
+                      <ng-container  matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef>Key</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+                      </ng-container>
+                      <mat-header-row [justify]="'center'" *matHeaderRowDef="tableColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+                    </mat-table>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  
+                  <!-- <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Close</button> -->
+                  <button type="button" class="btn btn-white" (click)="downloadFile()">Download</button>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+          </div>
+          <!-- <div class="row mt-3">            
+            <div class="col-12 text-right">
+              <a href="javascript:void(0)" class="text-light">
+                <large>Generate via Upload?</large>
+              </a>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
